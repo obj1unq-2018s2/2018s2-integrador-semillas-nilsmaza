@@ -4,7 +4,7 @@ class Parcela{
 	
 	const largo
 	const ancho
-	var property horasDeSolXDia
+	const property horasDeSolXDia
 	var property plantas = []
 	
 	method superficie() = ancho * largo
@@ -20,16 +20,33 @@ class Parcela{
 			plantas.add(planta)
 	}
 
+	method plantaBienAsociada(planta) = true
+	
+	method numeroDePlantasBienAsociandas() = plantas.filter{planta => self.plantaBienAsociada(planta) }.size()
+	
 }
 
 class ParcelaEcologica inherits Parcela{
 	
-	
+	override method plantaBienAsociada(planta) = (not self.tieneComplicaciones()) and planta.parcelaIdeal(self)
 	
 }
 
 class ParcelaIndustrial inherits Parcela{
 	
+	override method plantaBienAsociada(planta) = plantas.size() > 2 and planta.esFuerte()
+	
+}
+
+object inta {
+	
+	var property parcelas = []
+	
+	method agregarParcela(parcela) { parcelas.add (parcela)}
+	
+	method promedioDePlantas() = parcelas.sum{ parcela => parcela.plantas().size() } / parcelas.size()
+	
+	method masSustentable() = parcelas.filter{ parcela => parcela.plantas().size() > 4 }.max{parcela => parcela.numeroDePlantasBienAsociandas()}
 	
 	
 }

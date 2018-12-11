@@ -1,7 +1,7 @@
 class Planta {
 	
 	const property anioDeObtecion
-	var property altura
+	const property altura
 
 	
 	method horaDeSolQueTolera() 
@@ -54,13 +54,17 @@ class SojaTransgenica inherits Soja{
 	
 }
 
-class Quinoa inherits Planta{
+class Quinoa {
 	
 	var property horaDeSolQueTolera
+	const property anioDeObtecion
+	const property altura
 	
-	override method daNuevasSemillas() = super() or  anioDeObtecion < 2005
+	 method esFuerte() = horaDeSolQueTolera > 10
 	
-	override method espacioQueOcupa() = 0.5
+	 method daNuevasSemillas() = self.esFuerte() or  anioDeObtecion < 2005
+	
+	 method espacioQueOcupa() = 0.5
 	
 	method parcelaIdeal(parcela) = parcela.plantas().all{planta => planta.altura() < 1.5 }
 	
