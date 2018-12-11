@@ -1,7 +1,6 @@
 import plantas.*
 import parcelas.*
 
-
 describe"plantas y parcelas"{
 	
 	const menta1 = new Menta(anioDeObtecion =2000,altura = 1 )
